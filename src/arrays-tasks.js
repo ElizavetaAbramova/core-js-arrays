@@ -354,8 +354,20 @@ function calculateBalance(arr) {
  *    createChunks(['a', 'b', 'c', 'd', 'e'], 2) => [['a', 'b'], ['c', 'd'], ['e']]
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
-function createChunks(/* arr, chunkSize */) {
-  throw new Error('Not implemented');
+function createChunks(arr, chunkSize) {
+  let counter = 0;
+  let miniArr = [];
+  const newArr = [];
+  arr.map((item, index) => {
+    if (index === counter) {
+      miniArr = arr.slice(counter, counter + chunkSize);
+      counter += chunkSize;
+      newArr.push(miniArr);
+    }
+    return item;
+  });
+
+  return newArr;
 }
 
 /**
@@ -515,8 +527,18 @@ function findCommonElements(arr1, arr2) {
  *    findLongestIncreasingSubsequence([3, 10, 2, 1, 20]) => 2
  *    findLongestIncreasingSubsequence([50, 3, 10, 7, 40, 80]) => 3
  */
-function findLongestIncreasingSubsequence(/* nums */) {
-  throw new Error('Not implemented');
+function findLongestIncreasingSubsequence(nums) {
+  let max = 0;
+  let long = 0;
+  nums.map((item, index) => {
+    if (item > nums[index - 1] && index - 1 >= 0) max += 1;
+    if (item < nums[index - 1] && index - 1 >= 0) max = 0;
+    if (long < max) long = max;
+    return max;
+  });
+  if (long > 0) long += 1;
+  return long;
+  // throw new Error('Not implemented');
 }
 
 /**
